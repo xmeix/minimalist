@@ -1,0 +1,54 @@
+.todoform {
+  margin-top: 1em;
+  height: 20vh;
+  /*background-color: yellow;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.todoform form {
+  width: 100%;
+  padding: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.todoform form textarea {
+  background-color: transparent;
+  padding: 0.8em;
+  border: 1px solid rgba(211, 211, 211, 0.507);
+  border-radius: 5px;
+  text-align: center;
+  margin: 0.5em;
+  outline: none;
+  font-weight: 600;
+}
+.todoform form textarea:hover {
+  cursor: pointer;
+  border: 2px solid rgba(211, 211, 211, 0.507);
+}
+
+.todoform form .inp1 {
+  width: 350px;
+  min-height: 40px;
+  max-height: 85px;
+}
+.todoform form .btn {
+  outline: none;
+  color: rgba(165, 161, 161, 0.856);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.8em;
+  border-radius: 3px;
+  margin-left: 0.5em;
+}
+.todoform form .btn:hover {
+  color: black;
+  font-weight: bold;
+  background-color: rgba(197, 194, 194, 0.377);
+}

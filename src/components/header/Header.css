@@ -1,0 +1,64 @@
+.header {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .icons {
+  align-self: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  margin: 1em;
+  z-index: 2;
+}
+
+.header .icons button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 1em;
+}
+
+.header .icons button:hover {
+  background-color: rgba(211, 211, 211, 0.507);
+  border-radius: 10px;
+}
+.header .logo {
+  font-weight: 100;
+  font-size: 40px;
+}
+
+.side {
+  position: absolute;
+  z-index: 99;
+  background-color: white;
+  height: 100%;
+  width: 40%;
+  top: 0;
+  right: 0;
+  color: black;
+  opacity: 1;
+  border: solid 1px lightgrey;
+  transition: all 0.5s ease-in-out;
+}
+.blank {
+  position: absolute;
+  z-index: 99;
+  background-color: gray;
+  height: 100%;
+  width: 60%;
+  top: 0;
+  left: 0;
+  color: black;
+  opacity: 1;
+  border: solid 1px lightgrey;
+  transition: all 0.5s ease-in-out;
+  opacity: 0.5;
+}

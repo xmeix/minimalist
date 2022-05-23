@@ -1,0 +1,46 @@
+.contact {
+  height: 100%;
+  color: black;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  /* rgb(163, 145, 147) */
+  transition: all 0.5s ease-in-out;
+}
+
+.messages,
+.reach {
+  padding: 1em;
+}
+.message {
+  font-size: 30px;
+  font-weight: 600;
+}
+.secMessage {
+  font-weight: 600;
+  padding: 0.5em;
+}
+
+.reach {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.phone,
+.email,
+.adress {
+  padding: 1em;
+}
+
+.copyright {
+  padding: 2em;
+  font-weight: bold;
+  justify-self: flex-end;
+}
