@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/minimalist/static/css/main.92550189.css",
-    "main.js": "/minimalist/static/js/main.47e7e006.js",
+    "main.css": "/minimalist/static/css/main.3a793d78.css",
+    "main.js": "/minimalist/static/js/main.090a020a.js",
     "index.html": "/minimalist/index.html",
-    "main.92550189.css.map": "/minimalist/static/css/main.92550189.css.map",
-    "main.47e7e006.js.map": "/minimalist/static/js/main.47e7e006.js.map"
+    "main.3a793d78.css.map": "/minimalist/static/css/main.3a793d78.css.map",
+    "main.090a020a.js.map": "/minimalist/static/js/main.090a020a.js.map"
   },
   "entrypoints": [
-    "static/css/main.92550189.css",
-    "static/js/main.47e7e006.js"
+    "static/css/main.3a793d78.css",
+    "static/js/main.090a020a.js"
   ]
 }
