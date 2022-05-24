@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/minimalist/static/css/main.92550189.css",
+    "main.js": "/minimalist/static/js/main.47e7e006.js",
+    "index.html": "/minimalist/index.html",
+    "main.92550189.css.map": "/minimalist/static/css/main.92550189.css.map",
+    "main.47e7e006.js.map": "/minimalist/static/js/main.47e7e006.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92550189.css",
+    "static/js/main.47e7e006.js"
+  ]
+}
