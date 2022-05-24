@@ -40,7 +40,7 @@
   z-index: 99;
   background-color: white;
   height: 100%;
-  width: 40%;
+  width: 60%;
   top: 0;
   right: 0;
   color: black;
@@ -52,8 +52,8 @@
   position: absolute;
   z-index: 99;
   background-color: gray;
-  height: 100%;
-  width: 60%;
+  height: 150%;
+  width: 40%;
   top: 0;
   left: 0;
   color: black;
