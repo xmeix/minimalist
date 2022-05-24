@@ -21,6 +21,7 @@
   padding: 0.5em;
   border-radius: 3px;
   filter: brightness(1.1);
+  cursor: pointer;
 }
 
 .todos {
@@ -37,7 +38,7 @@
   padding: 0.7em;
   margin: 0 0 1em;
   /* min-width: 200px;*/
-  max-width: 350px; 
+  max-width: 350px;
   border-radius: 5px;
   cursor: pointer;
   overflow: hidden;
@@ -48,8 +49,14 @@
   /* border: solid 1px lightgrey; */
   color: rgba(70, 68, 68, 0.801);
 }
+.sectionName:hover {
+  /* border: solid 1px lightgrey; */
+  color: rgba(70, 68, 68, 0.801);
+}
 .todo:before,
-.todo:after {
+.todo:after,
+.sectionName:after,
+.sectionName:before {
   content: "";
   position: absolute;
   width: 0%;
@@ -59,22 +66,26 @@
   background: lightgrey;
 }
 
-.todo:before {
+.todo:before,
+.sectionName:before {
   left: -2.5px;
 }
-.todo:after {
+.todo:after,
+.sectionName:after {
   right: 2.5px;
   background: lightgrey;
   transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.todo:hover:before {
+.todo:hover:before,
+.sectionName:hover:before {
   background: lightgrey;
   width: 100%;
   transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.todo:hover:after {
+.todo:hover:after,
+.sectionName:hover:after {
   background: transparent;
   width: 100%;
   transition: 0s;

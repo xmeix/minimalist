@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeTodo } from "../../features/todoSlice";
+import { removeSection, removeTodo } from "../../features/todoSlice";
 import "./TodoList.css";
 
 const TodoList = () => {
@@ -19,15 +19,18 @@ const TodoList = () => {
     "#7DB6B4",
     "#7DB697",
   ];
-  const [checked, setChecked] = useState(false);
   const todoList = useSelector((state) => state.todos.todoList);
   const sectionList = useSelector((state) => state.todos.sections);
   const dispatch = useDispatch();
 
-  const checkIt = (todo) => {
+  const handleRemoveTodo = (todo) => {
     console.log(todo);
     dispatch(removeTodo(todo));
-    setChecked(true);
+    return;
+  };
+  const handleRemoveSection = (section) => {
+    console.log(section);
+    dispatch(removeSection(section));
     return;
   };
 
@@ -40,6 +43,7 @@ const TodoList = () => {
         <div className="liste" key={i}>
           <div
             className="sectionName"
+            onClick={() => handleRemoveSection(section)}
             style={{
               backgroundColor:
                 aestheticColors[
@@ -55,7 +59,11 @@ const TodoList = () => {
                 (todo) => todo.section.value === section.value.toLowerCase()
               )
               .map((todo, j) => (
-                <div className="todo" key={j} onClick={() => checkIt(todo)}>
+                <div
+                  className="todo"
+                  key={j}
+                  onClick={() => handleRemoveTodo(todo)}
+                >
                   {todo.todo}
                 </div>
               ))}
