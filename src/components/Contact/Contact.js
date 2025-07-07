@@ -8,8 +8,8 @@ const Contact = () => {
         <div className="secMessage">Don't be afraid to ask for help.</div>
       </div>
       <div className="reach">
-        <div className="phone">+2130559088877</div>
-        <div className="email">Minimalist@gmail.com</div>
+        <div className="phone">+213791303438</div>
+        <div className="email">lamiaboualouache@gmail.com</div>
         <div className="adress">Alger,Algeria</div>
       </div>
       <div className="copyright">© Boualouache Lamia</div>
