@@ -1,16 +1,11 @@
+// features/todoSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todoList: [],
   removedList: [],
-  sections: [],
+  sections: [], // May be removed if managed separately
 };
-
-// if (localStorage.getItem("todos")) {
-//   initialState.todoList = JSON.parse(localStorage.getItem("todos"));
-// } else {
-//   initialState.todoList = [];
-// }
 
 const todoSlice = createSlice({
   name: "todos",
@@ -18,52 +13,39 @@ const todoSlice = createSlice({
   reducers: {
     saveTodo: (state, action) => {
       state.todoList.push(action.payload);
-      // console.log(state.todoList);
-      // localStorage.setItem("todos", JSON.stringify(state.todoList));
     },
     removeTodo: (state, action) => {
-      //console.log(action.payload);
       state.removedList.push(action.payload);
-
-      state.todoList.splice(
-        state.todoList.findIndex((todo) => todo.id === action.payload.id),
-        1
+      state.todoList = state.todoList.filter(
+        (todo) => todo.id !== action.payload.id
       );
     },
     saveSection: (state, action) => {
-      state.sections.push(action.payload);
+      const exists = state.sections.some(
+        (s) => s.value === action.payload.value
+      );
+      if (!exists) state.sections.push(action.payload);
     },
     removeSection: (state, action) => {
-      state.sections.splice(
-        state.sections.findIndex(
-          (section) => section.value === action.payload.value
-        ),
-        1
+      const sectionValue = action.payload?.value;
+
+      state.sections = state.sections.filter(
+        (section) => section?.value !== sectionValue
       );
-      state.todoList
-        .filter((todo) => todo.section.value === action.payload.value)
-        .map((todo) => state.removedList.push(todo));
 
-      state.todoList
-        .filter((todo) => todo.section.value === action.payload.value)
-        .map((todo) =>
-          state.todoList.splice(
-            state.todoList.findIndex((todo) => todo),
-            1
-          )
-        );
+      const removedTodos = state.todoList.filter(
+        (todo) => todo?.section?.value === sectionValue
+      );
 
-      // state.todoList.splice(
-      //   state.sections.findIndex(
-      //     (section) => section.value === action.payload.value
-      //   ),
-      //   1
-      // );
+      state.removedList.push(...removedTodos);
+
+      state.todoList = state.todoList.filter(
+        (todo) => todo?.section?.value !== sectionValue
+      );
     },
   },
 });
 
 export const { saveTodo, removeTodo, saveSection, removeSection } =
   todoSlice.actions;
-
 export default todoSlice.reducer;

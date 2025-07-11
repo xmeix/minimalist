@@ -1,28 +1,35 @@
+// features/sectionSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  sectionList: [],
+// Safe parse helper
+const loadFromLocalStorage = (key, fallback = []) => {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : fallback;
+  } catch {
+    return fallback;
+  }
 };
 
-if (localStorage.getItem("sections")) {
-  initialState.sectionList = JSON.parse(localStorage.getItem("sections"));
-} else {
-  initialState.sectionList = [];
-}
+const initialState = {
+  sectionList: loadFromLocalStorage("sections"),
+};
 
 const sectionSlice = createSlice({
   name: "sections",
   initialState,
   reducers: {
     saveSection: (state, action) => {
-      state.sectionList.push(action.payload);
-      console.log("sections: ",state.sectionList);
-      localStorage.setItem("sections", JSON.stringify(state.sectionList));
+      const exists = state.sectionList.some(
+        (s) => s.value === action.payload.value
+      );
+      if (!exists) {
+        state.sectionList.push(action.payload);
+        localStorage.setItem("sections", JSON.stringify(state.sectionList));
+      }
     },
   },
 });
 
-
 export const { saveSection } = sectionSlice.actions;
-
 export default sectionSlice.reducer;

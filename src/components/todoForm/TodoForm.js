@@ -1,12 +1,9 @@
-import React from "react";
-import "./TodoForm.css";
+// components/todoForm/TodoForm.jsx
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CreatableSelect from "react-select/creatable";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { saveTodo } from "../../features/todoSlice";
-import { saveSection } from "../../features/todoSlice";
-
-// const savedSections = JSON.parse(localStorage.getItem("sections"));
+import { saveTodo, saveSection } from "../../features/todoSlice";
+import "./TodoForm.css";
 
 const styles = {
   option: (provided, state) => ({
@@ -50,76 +47,79 @@ const styles = {
     },
   }),
 };
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////
+
 const TodoForm = () => {
   const textareaRef = useRef(null);
-  const [sectionValue, setSectionValue] = useState("");
-  const [todo, setTodo] = useState("");
   const dispatch = useDispatch();
+  const [sectionValue, setSectionValue] = useState(null); // should be object or null
+  const [todo, setTodo] = useState("");
 
-  const sections = useSelector((state) => state.todos.sections);
-  console.log("sections : ", sections);
-  // useEffect(() => {
-  //   localStorage.setItem("sections", JSON.stringify(sections));
-  // }, [sections]);
+  const sections = useSelector((state) => state.todos.sections); // adjust if using sectionSlice
 
-  ///////////////////////////////////////////////////////
-  const handleChange = useCallback((inputValue) => {
-    setSectionValue(inputValue);
+  const handleChange = useCallback((newValue) => {
+    setSectionValue(newValue);
   }, []);
 
-  //////////////////////////////////////////////////////
-
   useEffect(() => {
-    textareaRef.current.style.height = "0px";
-    const scrollHeight = textareaRef.current.scrollHeight;
-    textareaRef.current.style.height = scrollHeight + "px";
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "0px";
+      const scrollHeight = textareaRef.current.scrollHeight;
+      textareaRef.current.style.height = scrollHeight + "px";
+    }
   }, [todo]);
-  ///////////////////////////////////////////////////////
-  // const DoesExists = (sectionArray, sectionName) => {
-  //   return sectionArray.some((section) => section === sectionName);
 
-  //   //return sectionArray.includes({ name: sectionName });
-  // };
-  //////////////////////////////////////////////////////
   const handleCreateNewSection = useCallback(
     (inputValue) => {
-      if (todo !== "") {
-        const newValue = inputValue.toLowerCase().trim();
-        console.log("newValue: ", newValue);
-        // setSections([...sections, { value: newValue, label: newValue }]);
+      if (todo.trim() === "") {
+        console.log("You must write the todo first!");
+        return;
+      }
+
+      const newValue = inputValue.toLowerCase().trim();
+      const existingSection = sections.find(
+        (section) => section.value === newValue
+      );
+
+      if (!existingSection) {
         dispatch(
           saveSection({
             value: newValue,
             label: newValue,
           })
         );
+        console.log("Section created:", newValue);
+      } else {
+        console.log("Section already exists:", newValue);
+      }
 
-        console.log(newValue);
-      } else console.log("you have to write the todo first!");
-
-      setSectionValue("");
+      setSectionValue({ value: newValue, label: newValue });
     },
-    [todo, dispatch]
+    [todo, dispatch, sections]
   );
 
   const addTodo = (e) => {
     e.preventDefault();
-    if (todo === "" || sectionValue === "") {
-      console.log("One of the fields is empty!");
-    } else {
-      console.log(`adding ${todo} in ${sectionValue}...`);
-      dispatch(
-        saveTodo({
-          id: Date.now(),
-          section: sectionValue,
-          todo: todo,
-          done: false,
-        })
-      );
+
+    if (!todo.trim() || !sectionValue) {
+      alert("Both fields are required!");
+      return;
     }
+
+ 
+
+    dispatch(
+      saveTodo({
+        id: Date.now(),
+        section: sectionValue,
+        todo: todo.trim(),
+        done: false,
+      })
+    );
+
+    setTodo("");
+    setSectionValue(null);
   };
+
   return (
     <div className="todoform">
       <form onSubmit={addTodo}>
@@ -137,15 +137,13 @@ const TodoForm = () => {
           value={sectionValue}
           options={sections}
           styles={styles}
-          isDisabled={false}
-          isClearable={true}
-          isSearchable={true}
-          hideSelectedOptions={false}
+          isClearable
+          isSearchable
           onChange={handleChange}
           onCreateOption={handleCreateNewSection}
           placeholder={"choose a section"}
         />
-        <button className="btn">Enter </button>
+        <button className="btn">Enter</button>
       </form>
     </div>
   );

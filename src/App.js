@@ -7,13 +7,9 @@ import TodoList from "./components/todoList/TodoList";
 function App() {
   return (
     <div className="App">
-      <Header />
-      {/** here the todo form */}
-      <TodoForm />
-      {/** here the todo list */}
-      <TodoList />
-      {/** here the completed todo list history */}
-      {/* <History /> */}
+      <Header /> 
+      <TodoForm /> 
+      <TodoList /> 
     </div>
   );
 }
